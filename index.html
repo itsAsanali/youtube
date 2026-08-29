@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect...</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        a {
+            color: #3ea6ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>Редирект на мой аккаунт...</p>
+        <p>Если редирект то кликни <a id="fallback-link" href="https://www.youtube.com/@asanali_midiplayer-btw">сюда</a>.</p>
+    </div>
+
+    <script>
+        // Ссылка на твой правильный канал
+        const channelUrl = 'https://www.youtube.com/@asanali_midiplayer-btw';
+        
+        // Читаем query-параметр ?watch=
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoId = urlParams.get('watch');
+
+        // Собираем конечную ссылку (если есть ?watch=ID, шлем на видео, иначе на канал)
+        const targetUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : channelUrl;
+
+        // Обновляем запасную ссылку для клика вручную
+        document.getElementById('fallback-link').href = targetUrl;
+
+        // Моментальный редирект
+        window.location.replace(targetUrl);
+    </script>
+</body>
+</html>
